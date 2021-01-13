@@ -29,6 +29,8 @@ common_derive! {
 }
 ```
 
+Check out the [documentation](https://docs.rs/apply-macro) for more examples.
+
 ## Supported Rust versions
 Latest nightly, beta and stable.
 
