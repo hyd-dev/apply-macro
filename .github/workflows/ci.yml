@@ -1,0 +1,74 @@
+name: CI
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - .editorconfig
+      - .gitignore
+      - .github/**
+      - '!.github/workflows/ci.yml'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - .editorconfig
+      - .gitignore
+      - .github/**
+      - '!.github/workflows/ci.yml'
+  schedule:
+    - cron: 0 2 * * *
+
+env:
+  RUST_BACKTRACE: 1
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_OFFLINE: 1
+  CARGO_PROFILE_DEV_DEBUG: 1
+  CARGO_PROFILE_RELEASE_DEBUG: 1
+  CARGO_PROFILE_TEST_DEBUG: 1
+  CARGO_PROFILE_BENCH_DEBUG: 1
+  CARGO_TERM_COLOR: always
+  CARGO_TERM_VERBOSE: true
+
+jobs:
+  test:
+    timeout-minutes: 1
+    strategy:
+      matrix:
+        version: [nightly, beta, stable]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{matrix.version}}
+          components: clippy
+          override: true
+      - uses: actions-rs/toolchain@v1
+        if: matrix.version == 'beta'
+        with:
+          toolchain: ${{matrix.version}}
+          components: rustfmt
+      - name: cargo fmt
+        uses: actions-rs/cargo@v1
+        if: matrix.version == 'beta'
+        with:
+          command: fmt
+          args: -- --check --color=always -v
+      - name: cargo clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --all-targets
+      - name: cargo clippy --release
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --release --all-targets
+      - name: cargo test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+      - name: cargo test --release
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --release
