@@ -35,7 +35,7 @@ Check out the [documentation](https://docs.rs/apply-macro) for more examples.
 Latest nightly, beta and stable.
 
 ## License
-This project is [licensed](./LICENSE_NOTICE.md) under the [Mozilla Public License Version 2.0](./LICENSE.md).
+This project is [licensed](./COPYRIGHT.md) under the [Mozilla Public License Version 2.0](./LICENSE.md).
 
 ## Contribution
 Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in this project by you, shall be licensed as [MPL 2.0](./LICENSE.md), without any additional terms or conditions.

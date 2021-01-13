@@ -9,7 +9,7 @@ keywords = ["attribute", "macro"]
 categories = ["rust-patterns", "no-std"]
 repository = "https://github.com/hyd-dev/apply-macro"
 documentation = "https://docs.rs/apply-macro"
-include = ["Cargo.toml", "src", "LICENSE.md", "LICENSE_NOTICE.md"]
+include = ["Cargo.toml", "src", "COPYRIGHT.md", "LICENSE.md"]
 
 [lib]
 proc-macro = true
