@@ -1,19 +1,7 @@
 name: CI
 on:
   push:
-    paths-ignore:
-      - '**.md'
-      - .editorconfig
-      - .gitignore
-      - .github/**
-      - '!.github/workflows/ci.yml'
   pull_request:
-    paths-ignore:
-      - '**.md'
-      - .editorconfig
-      - .gitignore
-      - .github/**
-      - '!.github/workflows/ci.yml'
   schedule:
     - cron: 0 2 * * *
 
@@ -76,3 +64,9 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: doc
+  diff-check:
+    timeout-minutes: 1
+    runs-on: ubuntu-20.01
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hyd-dev/diff-check@HEAD
