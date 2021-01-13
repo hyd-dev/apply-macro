@@ -42,7 +42,7 @@ use proc_macro::{Delimiter, Group, Punct, Spacing, TokenStream};
 /// This accepts the path to the function-like macro you want to call as argument.
 /// See also [the example in the crate-level documentation](crate#example).
 ///
-/// ## Limitation
+/// ## Known issue
 /// This macro does not check for invalid arguments:
 /// ```
 /// # use apply_macro::apply;
