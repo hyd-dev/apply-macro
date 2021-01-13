@@ -72,3 +72,7 @@ jobs:
         with:
           command: test
           args: --release
+      - name: cargo doc
+        uses: actions-rs/cargo@v1
+        with:
+          command: doc
