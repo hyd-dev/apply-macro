@@ -1,6 +1,6 @@
 [package]
 name = "apply-macro"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["hyd-dev <yd-huang@outlook.com>"]
 edition = "2018"
 license = "MPL-2.0"
@@ -10,7 +10,6 @@ categories = ["rust-patterns", "no-std"]
 repository = "https://github.com/hyd-dev/apply-macro"
 documentation = "https://docs.rs/apply-macro"
 include = ["Cargo.toml", "src", "LICENSE.md", "LICENSE_NOTICE.md"]
-metadata.docs.rs.targets = ["aarch64-unknown-linux-musl"]
 
 [lib]
 proc-macro = true
