@@ -43,7 +43,7 @@ use proc_macro::{Delimiter, Group, Punct, Spacing, TokenStream};
 /// See also [the example in the crate-level documentation](crate#example).
 ///
 /// ## Known issue
-/// This macro does not check for invalid arguments:
+/// This attribute macro does not check for invalid arguments:
 /// ```
 /// # use apply_macro::apply;
 /// #
