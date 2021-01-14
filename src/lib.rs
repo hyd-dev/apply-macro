@@ -123,9 +123,9 @@ macro_rules! punct {
 
 /// The main attribute macro of this crate.
 ///
-/// This accepts comma-separated paths to the function-like macros you want to
-/// call as arguments. See also [examples in the crate-level
-/// documentation](crate#example).
+/// This macro accepts comma-separated paths to the function-like macros you
+/// want to call as arguments. See also [examples in the crate-level
+/// documentation] (crate#example).
 ///
 /// ## Limitation
 /// **Note that this may be fixed in the future without a major version bump.
