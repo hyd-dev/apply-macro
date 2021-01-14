@@ -42,7 +42,7 @@
 //! }
 //! ```
 //!
-//! Multiple macros are seperated by commas:
+//! Multiple macros are separated by comma:
 //! ```
 //! use apply_macro::apply;
 //!
@@ -122,8 +122,8 @@ macro_rules! punct {
 
 /// The main attribute macro of this crate.
 ///
-/// This accepts paths to the function-like macros you want to call as
-/// arguments. See also [examples in the crate-level
+/// This accepts comma-separated paths to the function-like macros you want to
+/// call as arguments. See also [examples in the crate-level
 /// documentation](crate#example).
 ///
 /// ## Limitation
