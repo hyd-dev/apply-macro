@@ -113,7 +113,7 @@ fn into_tt(tt: impl Into<TokenTree>) -> impl Iterator<Item = TokenTree> {
     once(tt.into())
 }
 
-macro_rules! p {
+macro_rules! punct {
     [$punct1:literal $($punct:literal)*] => {
         into_tt(Punct::new($punct1, Spacing::Joint))
             $(.chain(into_tt(Punct::new($punct, Spacing::Joint))))*
@@ -162,17 +162,17 @@ pub fn apply(args: TokenStream, input: TokenStream) -> TokenStream {
                         break;
                     }
                     result.extend(
-                        p!['!'].chain(into_tt(Group::new(
+                        punct!['!'].chain(into_tt(Group::new(
                             Delimiter::Brace,
-                            p!['#']
+                            punct!['#']
                                 .chain(into_tt(Group::new(
                                     Delimiter::Bracket,
-                                    p![':' ':']
+                                    punct![':' ':']
                                         .chain(into_tt(Ident::new(
                                             "apply_macro",
                                             Span::call_site(),
                                         )))
-                                        .chain(p![':' ':'])
+                                        .chain(punct![':' ':'])
                                         .chain(into_tt(Ident::new("apply", Span::call_site())))
                                         .chain(into_tt(Group::new(Delimiter::Parenthesis, args)))
                                         .collect(),
@@ -186,7 +186,7 @@ pub fn apply(args: TokenStream, input: TokenStream) -> TokenStream {
             }
             result.extend(once(tt));
         }
-        result.extend(p!['!'].chain(into_tt(Group::new(Delimiter::Brace, input))));
+        result.extend(punct!['!'].chain(into_tt(Group::new(Delimiter::Brace, input))));
         result
     }
 }
