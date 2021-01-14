@@ -10,31 +10,6 @@ This crate has *no* dependency so you don't need to worry about compile time.
 ```rust
 use apply_macro::apply;
 
-macro_rules! common_derive {
-    ($input:item) => {
-        #[derive(Debug, PartialEq)]
-        $input
-    };
-}
-
-#[apply(common_derive)]
-struct Num(i32);
-
-assert_eq!(Num(-1), Num(-1));
-assert_ne!(Num(1), Num(-1));
-```
-
-The `#[apply(common_derive)]` above expands to:
-```rust
-common_derive! {
-    struct Num(i32);
-}
-```
-
-Multiple macros example:
-```rust
-use apply_macro::apply;
-
 macro_rules! derive_debug {
     {
         #[$attr:meta] // will receive `#[apply(derive_partial_eq)]`
@@ -58,6 +33,31 @@ struct Num(i32);
 
 assert_eq!(Num(-1), Num(-1));
 assert_ne!(Num(1), Num(-1));
+```
+
+Single macro example:
+```rust
+use apply_macro::apply;
+
+macro_rules! common_derive {
+    ($input:item) => {
+        #[derive(Debug, PartialEq)]
+        $input
+    };
+}
+
+#[apply(common_derive)]
+struct Num(i32);
+
+assert_eq!(Num(-1), Num(-1));
+assert_ne!(Num(1), Num(-1));
+```
+
+The `#[apply(common_derive)]` above expands to:
+```rust
+common_derive! {
+    struct Num(i32);
+}
 ```
 
 Check out the [documentation](https://docs.rs/apply-macro) for more examples.

@@ -13,39 +13,6 @@
 //! ```
 //! use apply_macro::apply;
 //!
-//! macro_rules! common_derive {
-//!     ($input:item) => {
-//!         #[derive(Debug, PartialEq)]
-//!         $input
-//!     };
-//! }
-//!
-//! #[apply(common_derive)]
-//! struct Num(i32);
-//!
-//! assert_eq!(Num(-1), Num(-1));
-//! assert_ne!(Num(1), Num(-1));
-//!
-//! #[apply(common_derive,)]
-//! struct TrailingCommaIsAllowed;
-//!
-//! assert_eq!(TrailingCommaIsAllowed, TrailingCommaIsAllowed);
-//! ```
-//!
-//! The `#[apply(common_derive)]` on `Num` expands to:
-//! ```
-//! # macro_rules! common_derive {
-//! #     ($dummy:item) => {};
-//! # }
-//! common_derive! {
-//!     struct Num(i32);
-//! }
-//! ```
-//!
-//! Multiple macros are separated by comma:
-//! ```
-//! use apply_macro::apply;
-//!
 //! macro_rules! derive_debug {
 //!     {
 //!         #[$attr:meta] // will receive `#[apply(derive_clone, derive_partial_eq)]`
@@ -87,6 +54,39 @@
 //! assert_eq!(TrailingCommaIsAllowed, TrailingCommaIsAllowed);
 //! ```
 //!
+//! Single macro example:
+//! ```
+//! use apply_macro::apply;
+//!
+//! macro_rules! common_derive {
+//!     ($input:item) => {
+//!         #[derive(Debug, PartialEq)]
+//!         $input
+//!     };
+//! }
+//!
+//! #[apply(common_derive)]
+//! struct Num(i32);
+//!
+//! assert_eq!(Num(-1), Num(-1));
+//! assert_ne!(Num(1), Num(-1));
+//!
+//! #[apply(common_derive,)]
+//! struct TrailingCommaIsAllowed;
+//!
+//! assert_eq!(TrailingCommaIsAllowed, TrailingCommaIsAllowed);
+//! ```
+//!
+//! The `#[apply(common_derive)]` on `Num` expands to:
+//! ```
+//! # macro_rules! common_derive {
+//! #     ($dummy:item) => {};
+//! # }
+//! common_derive! {
+//!     struct Num(i32);
+//! }
+//! ```
+//!
 //! Empty argument is allowed (consistent with `#[derive()]`):
 //! ```
 //! use apply_macro::apply;
@@ -96,6 +96,7 @@
 //! # #[allow(unused_attributes, dead_code)]
 //! struct EmptyArg;
 //! ```
+//!
 //! Although, as a procedural macro, `#[apply]` can't be banned:
 //! ```
 //! use apply_macro::apply;
