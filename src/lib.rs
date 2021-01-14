@@ -45,11 +45,22 @@
 //!
 //! macro_rules! derive_debug {
 //!     {
-//!         #[$attr:meta] // will receive `#[apply(derive_partial_eq)]`
+//!         #[$attr:meta] // will receive `#[apply(derive_clone, derive_partial_eq)]`
 //!         $input:item
 //!     } => {
 //!         #[$attr] // avoid "error: macro attributes must be placed before `#[derive]`"
 //!         #[derive(Debug)]
+//!         $input
+//!     };
+//! }
+//!
+//! macro_rules! derive_clone {
+//!     {
+//!         #[$attr:meta] // will receive `#[apply(derive_partial_eq)]`
+//!         $input:item
+//!     } => {
+//!         #[$attr]
+//!         #[derive(Clone)]
 //!         $input
 //!     };
 //! }
@@ -61,13 +72,13 @@
 //!     };
 //! }
 //!
-//! #[apply(derive_debug, derive_partial_eq)]
+//! #[apply(derive_debug, derive_clone, derive_partial_eq)]
 //! struct Num(i32);
 //!
-//! assert_eq!(Num(-1), Num(-1));
+//! assert_eq!(Num(-1).clone(), Num(-1));
 //! assert_ne!(Num(1), Num(-1));
 //!
-//! #[apply(derive_debug, derive_partial_eq,)]
+//! #[apply(derive_debug, derive_clone, derive_partial_eq,)]
 //! struct TrailingCommaIsAllowed;
 //!
 //! assert_eq!(TrailingCommaIsAllowed, TrailingCommaIsAllowed);
