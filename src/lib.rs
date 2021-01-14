@@ -1,6 +1,6 @@
 #![deny(rustdoc, missing_docs, warnings, clippy::pedantic)]
 #![allow(missing_doc_code_examples)]
-#![doc(test(attr(deny(warnings))))]
+#![doc(test(attr(deny(warnings), forbid(unsafe_code))))]
 //! An attribute macro to apply function-like macros.
 //! It can improve the readability of your code.
 //!
