@@ -101,7 +101,7 @@
 //! Although, as a procedural macro, `#[apply]` can't be banned:
 //! ```
 //! # use apply_macro::apply;
-//! #[apply]
+//! #[apply] // same as `#[apply()]`
 //! # #[allow(dead_code)]
 //! struct Oops;
 //! ```
