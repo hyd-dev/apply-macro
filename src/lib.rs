@@ -1,6 +1,7 @@
 #![deny(rustdoc, missing_docs, warnings, clippy::pedantic)]
 #![allow(missing_doc_code_examples)]
 #![doc(test(attr(deny(warnings), forbid(unsafe_code))))]
+#![no_std]
 //! An attribute macro to apply function-like macros.
 //! It can apply *multiple* function-like macros that *only* accept an item (do
 //! *not* accept other function-like macro calls) to a single item or just
@@ -105,7 +106,6 @@
 //! # #[allow(dead_code)]
 //! struct Oops;
 //! ```
-#![no_std]
 
 use core::iter::once;
 use proc_macro::{Delimiter, Group, Ident, Punct, Spacing, Span, TokenStream, TokenTree};
