@@ -1,3 +1,4 @@
+#![deny(warnings, clippy::pedantic)]
 #![forbid(unsafe_code)]
 #![no_std]
 

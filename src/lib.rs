@@ -2,9 +2,12 @@
 #![allow(missing_doc_code_examples)]
 #![doc(test(attr(deny(warnings), forbid(unsafe_code))))]
 //! An attribute macro to apply function-like macros.
-//! It can improve the readability of your code.
+//! It can apply *multiple* function-like macros that *only* accept an item (do
+//! *not* accept other function-like macro calls) to a single item or just
+//! improve the *readability* of the code.
 //!
-//! This crate has *no* dependency so you don't need to worry about compile time.
+//! This crate has *no* dependency so you don't need to worry about compile
+//! time.
 //!
 //! # Examples
 //! ```
@@ -39,7 +42,7 @@
 //! }
 //! ```
 //!
-//! Multiple arguments are allowed and seperated by commas:
+//! Multiple macros are seperated by commas:
 //! ```
 //! use apply_macro::apply;
 //!
@@ -48,7 +51,7 @@
 //!         #[$attr:meta] // will receive `#[apply(derive_clone, derive_partial_eq)]`
 //!         $input:item
 //!     } => {
-//!         #[$attr] // avoid "error: macro attributes must be placed before `#[derive]`"
+//!         #[$attr]
 //!         #[derive(Debug)]
 //!         $input
 //!     };
@@ -84,7 +87,7 @@
 //! assert_eq!(TrailingCommaIsAllowed, TrailingCommaIsAllowed);
 //! ```
 //!
-//! Empty argument is also allowed (consistent with `#[derive()]`):
+//! Empty argument is allowed (consistent with `#[derive()]`):
 //! ```
 //! use apply_macro::apply;
 //!
@@ -119,8 +122,9 @@ macro_rules! p {
 
 /// The main attribute macro of this crate.
 ///
-/// This accepts paths to the function-like macros you want to call as argument.
-/// See also [examples in the crate-level documentation](crate#example).
+/// This accepts paths to the function-like macros you want to call as
+/// arguments. See also [examples in the crate-level
+/// documentation](crate#example).
 ///
 /// ## Limitation
 /// **Note that this may be fixed in the future without a major version bump.

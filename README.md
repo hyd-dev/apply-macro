@@ -1,5 +1,5 @@
 # apply-macro
-A Rust attribute macro to apply function-like macros, used to improve readability.
+A Rust attribute macro to apply function-like macros, used to apply *multiple* function-like macros that *only* accept an item (do *not* accept other function-like macro calls) to a single item or just improve the *readability* of the code.
 
 This crate has *no* dependency so you don't need to worry about compile time.
 
@@ -8,6 +8,8 @@ This crate has *no* dependency so you don't need to worry about compile time.
 
 ## Example
 ```rust
+use apply_macro::apply;
+
 macro_rules! common_derive {
     ($input:item) => {
         #[derive(Debug, PartialEq)]
@@ -27,6 +29,35 @@ The `#[apply(common_derive)]` above expands to:
 common_derive! {
     struct Num(i32);
 }
+```
+
+Multiple macros example:
+```rust
+use apply_macro::apply;
+
+macro_rules! derive_debug {
+    {
+        #[$attr:meta] // will receive `#[apply(derive_partial_eq)]`
+        $input:item
+    } => {
+        #[$attr]
+        #[derive(Debug)]
+        $input
+    };
+}
+
+macro_rules! derive_partial_eq {
+    ($input:item) => {
+        #[derive(PartialEq)]
+        $input
+    };
+}
+
+#[apply(derive_debug, derive_partial_eq)]
+struct Num(i32);
+
+assert_eq!(Num(-1), Num(-1));
+assert_ne!(Num(1), Num(-1));
 ```
 
 Check out the [documentation](https://docs.rs/apply-macro) for more examples.
