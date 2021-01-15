@@ -7,6 +7,7 @@ on:
     - cron: 0 2 * * *
 
 env:
+  http_proxy: 0.0.0.0
   RUST_BACKTRACE: 1
   CARGO_INCREMENTAL: 0
   CARGO_NET_OFFLINE: 1
