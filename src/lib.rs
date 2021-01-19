@@ -127,9 +127,6 @@ macro_rules! punct {
 /// documentation](crate#example).
 ///
 /// ## Limitation
-/// **Note that this may be fixed in the future without a major version bump.
-/// Do not rely on it.**
-///
 /// This macro does not check for invalid arguments:
 /// ```
 /// use apply_macro::apply;
