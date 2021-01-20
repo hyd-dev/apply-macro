@@ -42,6 +42,9 @@ use std::cell::Cell;
 
 #[apply(thread_local)]
 static TLS: Cell<i32> = 1.into();
+
+TLS.with(|tls| assert_eq!(tls.replace(-1), 1));
+TLS.with(|tls| assert_eq!(tls.get(), -1));
 ```
 
 The `#[apply(thread_local)]` above expands to:
