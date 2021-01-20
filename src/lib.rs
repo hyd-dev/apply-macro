@@ -55,37 +55,16 @@
 //! assert_eq!(TrailingCommaIsAllowed, TrailingCommaIsAllowed);
 //! ```
 //!
-//! Single macro example:
+//! Single macro (`thread_local!`) example:
 //! ```
 //! use apply_macro::apply;
+//! use std::cell::Cell;
 //!
-//! macro_rules! common_derive {
-//!     ($input:item) => {
-//!         #[derive(Debug, PartialEq)]
-//!         $input
-//!     };
-//! }
+//! #[apply(thread_local)]
+//! static TLS: Cell<i32> = 1.into();
 //!
-//! #[apply(common_derive)]
-//! struct Num(i32);
-//!
-//! assert_eq!(Num(-1), Num(-1));
-//! assert_ne!(Num(1), Num(-1));
-//!
-//! #[apply(common_derive,)]
-//! struct TrailingCommaIsAllowed;
-//!
-//! assert_eq!(TrailingCommaIsAllowed, TrailingCommaIsAllowed);
-//! ```
-//!
-//! The `#[apply(common_derive)]` on `Num` expands to:
-//! ```
-//! # macro_rules! common_derive {
-//! #     ($dummy:item) => {};
-//! # }
-//! common_derive! {
-//!     struct Num(i32);
-//! }
+//! TLS.with(|tls| assert_eq!(tls.replace(-1), 1));
+//! TLS.with(|tls| assert_eq!(tls.get(), -1));
 //! ```
 //!
 //! Empty argument is allowed (consistent with `#[derive()]`):

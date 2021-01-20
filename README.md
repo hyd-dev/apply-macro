@@ -35,28 +35,19 @@ assert_eq!(Num(-1), Num(-1));
 assert_ne!(Num(1), Num(-1));
 ```
 
-Single macro example:
+Single macro (`thread_local!`) example:
 ```rust
 use apply_macro::apply;
+use std::cell::Cell;
 
-macro_rules! common_derive {
-    ($input:item) => {
-        #[derive(Debug, PartialEq)]
-        $input
-    };
-}
-
-#[apply(common_derive)]
-struct Num(i32);
-
-assert_eq!(Num(-1), Num(-1));
-assert_ne!(Num(1), Num(-1));
+#[apply(thread_local)]
+static TLS: Cell<i32> = 1.into();
 ```
 
-The `#[apply(common_derive)]` above expands to:
+The `#[apply(thread_local)]` above expands to:
 ```rust
-common_derive! {
-    struct Num(i32);
+thread_local! {
+    static TLS: Cell<i32> = 1.into();
 }
 ```
 
