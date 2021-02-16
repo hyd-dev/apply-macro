@@ -131,8 +131,7 @@ pub fn apply(args: TokenStream, input: TokenStream) -> TokenStream {
         let mut result = TokenStream::new();
         for tt in &mut args {
             if let TokenTree::Punct(ref punct) = tt {
-                // TODO: https://github.com/rust-lang/rust/pull/78636
-                if punct.as_char() == ',' {
+                if *punct == ',' {
                     let args: TokenStream = args.collect();
                     if args.is_empty() {
                         break;
