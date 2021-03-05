@@ -1,5 +1,7 @@
+#![allow(unknown_lints)]
+#![forbid(unsafe_code)]
 #![deny(rustdoc, missing_docs, warnings, clippy::pedantic)]
-#![allow(missing_doc_code_examples)]
+#![allow(renamed_and_removed_lints, missing_doc_code_examples)] // E0710
 #![doc(test(attr(deny(warnings), forbid(unsafe_code))))]
 #![no_std]
 //! An attribute macro to apply function-like macros.
