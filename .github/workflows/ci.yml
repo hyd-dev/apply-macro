@@ -21,7 +21,7 @@ env:
 
 jobs:
   test:
-    timeout-minutes: 1
+    timeout-minutes: 5
     strategy:
       matrix:
         version: [nightly, beta, stable]
